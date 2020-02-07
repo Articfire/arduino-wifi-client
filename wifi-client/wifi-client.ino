@@ -1,9 +1,21 @@
-void setup() {
-  // put your setup code here, to run once:
+#include <SoftwareSerial.h>
+SoftwareSerial ESP(3, 2); // RX | TX
 
+void setup()
+{  Serial.begin(9600);
+   ESP.begin(9600);
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-
-}
+void loop()
+{
+   if (ESP.available())
+   {
+     char c = ESP.read() ;
+     Serial.print(c);
+   }
+       
+   if (Serial.available())
+   {  char c = Serial.read();
+      ESP.print(c);
+   }
+ }
